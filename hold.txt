@@ -1,0 +1,244 @@
+//
+// if(empty($fname)){
+//   echo "<script>$('.inpval').eq(0).css('box-shadow','inset 0px 0px 10px rgba(255,0,0,0.5)');</script>";
+// }else{
+//   echo "<script>$('.inpval').eq(0).css('box-shadow','inset 0px 0px 0px rgba(255,0,0,0.5)');</script>";
+// }
+//
+// if(empty($lname)){
+//   echo "<script>$('.inpval').eq(1).css('box-shadow','inset 0px 0px 10px rgba(255,0,0,0.5)');</script>";
+// }else{
+//   echo "<script>$('.inpval').eq(1).css('box-shadow','inset 0px 0px 0px rgba(255,0,0,0.5)');</script>";
+// }
+// if(empty($cell)){
+//   echo "<script>$('.inpval').eq(2).css('box-shadow','inset 0px 0px 10px rgba(255,0,0,0.5)');</script>";
+// }else{
+//   echo "<script>$('.inpval').eq(2).css('box-shadow','inset 0px 0px 0px rgba(255,0,0,0.5)');</script>";
+// }
+// if(empty($homenum)){
+//   echo "<script>$('.inpval').eq(3).css('box-shadow','inset 0px 0px 10px rgba(255,0,0,0.5)');</script>";
+// }else{
+//   echo "<script>$('.inpval').eq(3).css('box-shadow','inset 0px 0px 0px rgba(255,0,0,0.5)');</script>";
+// }
+// if(empty($country)){
+//   echo "<script>$('.inpval').eq(4).css('box-shadow','inset 0px 0px 10px rgba(255,0,0,0.5)');</script>";
+// }else{
+//   echo "<script>$('.inpval').eq(4).css('box-shadow','inset 0px 0px 0px rgba(255,0,0,0.5)');</script>";
+// }
+// if(empty($region)){
+//   echo "<script>$('.inpval').eq(5).css('box-shadow','inset 0px 0px 10px rgba(255,0,0,0.5)');</script>";
+// }else{
+//   echo "<script>$('.inpval').eq(5).css('box-shadow','inset 0px 0px 0px rgba(255,0,0,0.5)');</script>";
+// }
+// if(empty($city)){
+//   echo "<script>$('.inpval').eq(6).css('box-shadow','inset 0px 0px 10px rgba(255,0,0,0.5)');</script>";
+// }else{
+//   echo "<script>$('.inpval').eq(6).css('box-shadow','inset 0px 0px 0px rgba(255,0,0,0.5)');</script>";
+// }
+// if(empty($zip)){
+//   echo "<script>$('.inpval').eq(7).css('box-shadow','inset 0px 0px 10px rgba(255,0,0,0.5)');</script>";
+// }else{
+//   echo "<script>$('.inpval').eq(7).css('box-shadow','inset 0px 0px 0px rgba(255,0,0,0.5)');</script>";
+// }
+// if(empty($oemail)){
+//   echo "<script>$('.inpval').eq(8).css('box-shadow','inset 0px 0px 10px rgba(255,0,0,0.5)');</script>";
+// }
+// if(empty($nemail)){
+//   echo "<script>$('.inpval').eq(9).css('box-shadow','inset 0px 0px 10px rgba(255,0,0,0.5)');</script>";
+// }
+// if(empty($opass)){
+//   echo "<script>$('.inpval').eq(10).css('box-shadow','inset 0px 0px 10px rgba(255,0,0,0.5)');</script>";
+// }
+// if(empty($npass)){
+//   echo "<script>$('.inpval').eq(11).css('box-shadow','inset 0px 0px 10px rgba(255,0,0,0.5)');</script>";
+// }
+// if(empty($nuser)){
+//   echo "<script>$('.inpval').eq(12).css('box-shadow','inset 0px 0px 10px rgba(255,0,0,0.5)');</script>";
+// }
+// if(empty($ouser)){
+//   echo "<script>$('.inpval').eq(13).css('box-shadow','inset 0px 0px 10px rgba(255,0,0,0.5)');</script>"; ||  empty($oemail) ||  empty($nemail) ||  empty($opass) ||  empty($npass) ||  empty($nuser) ||  empty($ouser)
+// }
+
+
+
+
+
+
+
+
+
+
+
+
+
+if(empty($fname) ||  empty($lname) || empty($cell) || empty($homenum) || empty($country) || empty($region) || empty($city) ||  empty($zip)){
+  echo "* Please fill out the necessary feilds *";
+}else{
+  $isThere = $this->set->checkExist();
+
+  if($isThere == false){
+  if(!ctype_alpha($fname) || !(strlen($fname) > 2)){
+    echo "<br/><br/>* Your firstname is invalid ";
+    echo "<script>$('.inpval').eq(0).css('box-shadow','inset 0px 0px 10px rgba(255,0,0,0.5)');</script>";
+  }else{
+    $this->set->updateName("thy_fname","$fname");
+  }
+    if(!ctype_alpha($lname) || !(strlen($lname) > 2)){
+    echo "<br/><br/>* Your lastname is invalid ";
+    echo "<script>$('.inpval').eq(1).css('box-shadow','inset 0px 0px 10px rgba(255,0,0,0.5)');</script>";
+  }else{
+    $this->set->updateName("thy_lname","$lname");
+  }
+
+  if(!(strlen($cell) >= 10 &&  strlen($cell) <= 15) || !ctype_digit($cell)){
+    echo "* Phone Cell Number must be 10 - 15 digits";
+    echo "<script>$('.inpval').eq(2).css('box-shadow','inset 0px 0px 10px rgba(255,0,0,0.5)');</script>";
+  }else{
+    $this->set->updateUserSettings("thy_mobile","$cell");
+  }
+  if(!(strlen($homenum) >= 10 &&  strlen($homenum) <= 15) || !ctype_digit($homenum)){
+    echo "<br/><br/>* Phone Home Number must be 10 - 15 digits";
+    echo "<script>$('.inpval').eq(3).css('box-shadow','inset 0px 0px 10px rgba(255,0,0,0.5)');</script>";
+  }else{
+    $this->set->updateUserSettings("thy_homephone","$homenum");
+  }
+
+  if(!(strlen($country) > 2)){
+    echo "<br/><br/>* Your country name is invalid ";
+    echo "<script>$('.inpval').eq(4).css('box-shadow','inset 0px 0px 10px rgba(255,0,0,0.5)');</script>";
+  }else{
+    $this->set->updateUserSettings("thy_country","$country");
+  }
+    if(!(strlen($region) > 2)){
+    echo "<br/><br/>* Your region name is invalid ";
+    echo "<script>$('.inpval').eq(5).css('box-shadow','inset 0px 0px 10px rgba(255,0,0,0.5)');</script>";
+  }else{
+    $this->set->updateUserSettings("thy_region","$region");
+  }
+  if(!(strlen($city) > 2)){
+  echo "<br/><br/>*Your country city is invalid ";
+  echo "<script>$('.inpval').eq(6).css('box-shadow','inset 0px 0px 10px rgba(255,0,0,0.5)');</script>";
+}else{
+  $this->set->updateUserSettings("thy_city","$city");
+}
+
+  if(!(strlen($zip) == 5) || !ctype_alnum($zip)){
+    echo "<br/><br/>* Your postal code is invalid ";
+    echo "<script>$('.inpval').eq(7).css('box-shadow','inset 0px 0px 10px rgba(255,0,0,0.5)');</script>";
+  }else{
+    $this->set->updateUserSettings("thy_zip","$zip");
+  }
+}else{
+
+}
+}
+
+
+
+
+// $success = $this->set->updateAll($cell,$homenum,$country,$region,$city,$zip);
+// if($success == true){
+//   echo "<script>
+//
+//   $('.albox').fadeOut(500);
+//   $('.saved').fadeIn(700).fadeOut(700);
+//
+//   </script>";
+// }else{
+//   echo "<script>
+//
+//   $('.albox').fadeOut(500);
+//   $('.fail').fadeIn(700).fadeOut(700);
+//
+//   </script>";
+// }
+
+// $success = $this->set->insertAll($cell,$homenum,$country,$region,$city,$zip);
+// if($success == true){
+//   echo "<script>
+//
+//   $('.albox').fadeOut(500);
+//   $('.saved').fadeIn(700).fadeOut(700);
+//
+//   </script>";
+// }else{
+//   echo "<script>
+//
+//   $('.albox').fadeOut(500);
+//   $('.fail').fadeIn(700).fadeOut(700);
+//
+//   </script>";
+// }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    if(empty($fname)){
+      echo "<script>$('.inpval').eq(0).css('box-shadow','inset 0px 0px 10px rgba(255,0,0,0.5)');</script>";
+    }else{
+      echo "<script>$('.inpval').eq(0).css('box-shadow','inset 0px 0px 0px rgba(255,0,0,0.5)');</script>";
+    }
+
+    if(empty($lname)){
+      echo "<script>$('.inpval').eq(1).css('box-shadow','inset 0px 0px 10px rgba(255,0,0,0.5)');</script>";
+    }else{
+      echo "<script>$('.inpval').eq(1).css('box-shadow','inset 0px 0px 0px rgba(255,0,0,0.5)');</script>";
+    }
+    if(empty($cell)){
+      echo "<script>$('.inpval').eq(2).css('box-shadow','inset 0px 0px 10px rgba(255,0,0,0.5)');</script>";
+    }else{
+      echo "<script>$('.inpval').eq(2).css('box-shadow','inset 0px 0px 0px rgba(255,0,0,0.5)');</script>";
+    }
+    if(empty($homenum)){
+      echo "<script>$('.inpval').eq(3).css('box-shadow','inset 0px 0px 10px rgba(255,0,0,0.5)');</script>";
+    }else{
+      echo "<script>$('.inpval').eq(3).css('box-shadow','inset 0px 0px 0px rgba(255,0,0,0.5)');</script>";
+    }
+    if(empty($country)){
+      echo "<script>$('.inpval').eq(4).css('box-shadow','inset 0px 0px 10px rgba(255,0,0,0.5)');</script>";
+    }else{
+      echo "<script>$('.inpval').eq(4).css('box-shadow','inset 0px 0px 0px rgba(255,0,0,0.5)');</script>";
+    }
+    if(empty($region)){
+      echo "<script>$('.inpval').eq(5).css('box-shadow','inset 0px 0px 10px rgba(255,0,0,0.5)');</script>";
+    }else{
+      echo "<script>$('.inpval').eq(5).css('box-shadow','inset 0px 0px 0px rgba(255,0,0,0.5)');</script>";
+    }
+    if(empty($city)){
+      echo "<script>$('.inpval').eq(6).css('box-shadow','inset 0px 0px 10px rgba(255,0,0,0.5)');</script>";
+    }else{
+      echo "<script>$('.inpval').eq(6).css('box-shadow','inset 0px 0px 0px rgba(255,0,0,0.5)');</script>";
+    }
+    if(empty($zip)){
+      echo "<script>$('.inpval').eq(7).css('box-shadow','inset 0px 0px 10px rgba(255,0,0,0.5)');</script>";
+    }else{
+      echo "<script>$('.inpval').eq(7).css('box-shadow','inset 0px 0px 0px rgba(255,0,0,0.5)');</script>";
+    }
+    // if(empty($oemail)){
+    //   echo "<script>$('.inpval').eq(8).css('box-shadow','inset 0px 0px 10px rgba(255,0,0,0.5)');</script>";
+    // }
+    // if(empty($nemail)){
+    //   echo "<script>$('.inpval').eq(9).css('box-shadow','inset 0px 0px 10px rgba(255,0,0,0.5)');</script>";
+    // }
+    // if(empty($opass)){
+    //   echo "<script>$('.inpval').eq(10).css('box-shadow','inset 0px 0px 10px rgba(255,0,0,0.5)');</script>";
+    // }
+    // if(empty($npass)){
+    //   echo "<script>$('.inpval').eq(11).css('box-shadow','inset 0px 0px 10px rgba(255,0,0,0.5)');</script>";
+    // }
+    // if(empty($nuser)){
+    //   echo "<script>$('.inpval').eq(12).css('box-shadow','inset 0px 0px 10px rgba(255,0,0,0.5)');</script>";
+    // }
+    // if(empty($ouser)){
+    //   echo "<script>$('.inpval').eq(13).css('box-shadow','inset 0px 0px 10px rgba(255,0,0,0.5)');</script>"; ||  empty($oemail) ||  empty($nemail) ||  empty($opass) ||  empty($npass) ||  empty($nuser) ||  empty($ouser)
+    // }
